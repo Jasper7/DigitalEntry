@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<TabbedPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DigitalEntry.Views.Institution.InstitutionTabbedPage"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    android:TabbedPage.OffscreenPageLimit="5"
+    android:TabbedPage.IsSwipePagingEnabled="False"
+    android:TabbedPage.IsSmoothScrollEnabled="False"
+    xmlns:view="clr-namespace:DigitalEntry.Views"
+    xmlns:view2="clr-namespace:DigitalEntry.Views.Institution"
+    BarBackgroundColor="{StaticResource Primary}"
+    SelectedTabColor="White"
+    UnselectedTabColor="Silver">
+
+
+    <!--<Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>-->
+    <TabbedPage.Children>
+        <NavigationPage Title="Расписание" x:Name="MainTab"
+                        BarBackgroundColor="{StaticResource Primary}"
+                        BarTextColor="White">
+            <x:Arguments>
+                <view2:InstitutionMainPage Title="Главная" Icon="ic_action_scan" />
+            </x:Arguments>
+        </NavigationPage>
+        <!--<NavigationPage Title="Классы" IconImageSource="ic_action_mycodes"
+                        BarBackgroundColor="{StaticResource Primary}"
+                        BarTextColor="White"
+                        x:Name="ClassTab">
+            <x:Arguments>
+                <view2:ClassListPage Title="Классы" Icon="ic_action_mycodes"/>
+            </x:Arguments>
+        </NavigationPage>-->
+
+        <!--<NavigationPage Title="Родители" IconImageSource="ic_action_history"
+                        BarBackgroundColor="{StaticResource Primary}"
+                        BarTextColor="White"
+                        x:Name="ParentTab">
+            <x:Arguments>
+                <view2:ParentsListPage Title="Родители" Icon="ic_action_history"/>
+            </x:Arguments>
+        </NavigationPage>-->
+
+        <NavigationPage Title="Дети"
+                        BarBackgroundColor="{StaticResource Primary}"
+                        BarTextColor="White"
+                        x:Name="ChildTab">
+            <x:Arguments>
+                <view2:ChildsListPage Title="Дети" Icon="ic_action_settings"/>
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage Title="История"
+                        BarBackgroundColor="{StaticResource Primary}"
+                        BarTextColor="White"
+                        x:Name="HistoryTab">
+            <x:Arguments>
+                <view2:AccessHistoryPage Title="История" Icon="ic_action_settings"/>
+            </x:Arguments>
+        </NavigationPage>
+
+    </TabbedPage.Children>
+</TabbedPage>
+

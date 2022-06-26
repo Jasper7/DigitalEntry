@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DigitalEntry.Views.ShowQrCodePage"
+    xmlns:zxView="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+    xmlns:vm="clr-namespace:DigitalEntry.ViewModels"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:DigitalEntry"
+    ios:Page.UseSafeArea="true"
+    ios:Page.ModalPresentationStyle="Automatic"
+    BackgroundColor="{DynamicResource NotesBackground}">
+    <ContentPage.Content>
+        <StackLayout Padding="8" Spacing="8">
+            <!--<ImageButton Source="close" Grid.Row="0" VerticalOptions="Start"
+                    HorizontalOptions="End" WidthRequest="40" Clicked="OnClose"
+                    Margin="8,8,0,0" BackgroundColor="Transparent"/>-->
+
+            <StackLayout CompressedLayout.IsHeadless="True"
+                         IsVisible="{Binding IsPreviewCode}" Margin="0,32,0,0">
+                <Label  x:Name="barcodedecode" HorizontalOptions="Center" FontSize="Default"/>
+                <Label HorizontalOptions="Center" VerticalOptions="Center"
+                           FontSize="Small" TextColor="Silver" x:Name="DateTimeLabel"/>
+            </StackLayout>
+
+            <zxView:ZXingBarcodeImageView x:Name="barcode"
+                                          HeightRequest="480"
+                                          WidthRequest="480"
+                                          HorizontalOptions="FillAndExpand"
+                                          VerticalOptions="FillAndExpand"/>
+
+
+            <Button Text="Закрыть" Clicked="OnClose"/>
+            <!--<StackLayout CompressedLayout.IsHeadless="True"
+                         IsVisible="{Binding IsCreateCode}" Orientation="Horizontal"
+                         HorizontalOptions="Center">
+                <Button Text="&#xf0c7;" WidthRequest="56" HeightRequest="56" BackgroundColor="{StaticResource BlueColor}"
+                    TextColor="White" FontSize="{OnPlatform iOS=40, Android=32}" CornerRadius="12"
+                    FontFamily="IconsRegularFont" Clicked="OnSaveCode"/>
+                <ImageButton Source="share_text" WidthRequest="56" HeightRequest="56" BackgroundColor="{StaticResource BlueColor}"
+                             Padding="6" Clicked="OnShareCode"
+                             CornerRadius="12"/>
+            </StackLayout>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

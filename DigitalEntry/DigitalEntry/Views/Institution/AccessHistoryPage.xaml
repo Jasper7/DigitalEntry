@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DigitalEntry.Views.Institution.AccessHistoryPage"
+    xmlns:model="clr-namespace:DigitalEntry.Models"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:control="clr-namespace:Plugin.Segmented.Control;assembly=Plugin.Segmented"
+    ios:Page.UseSafeArea="true"
+    Title="История">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <control:SegmentedControl 
+                x:Name="SegmentedControl" 
+                TintColor="#5e5ce6"
+                SelectedTextColor="White"
+                TextColor="Gray"
+                FontSize="Small"
+                Margin="8"
+                OnSegmentSelected="OnChangeFilter">
+                <control:SegmentedControl.Children>
+                    <control:SegmentedControlOption Text="Все"/>
+                    <control:SegmentedControlOption Text="Экстренные"/>
+                    <control:SegmentedControlOption Text="Отклоненные"/>
+                </control:SegmentedControl.Children>
+            </control:SegmentedControl>
+            <CollectionView BackgroundColor="{DynamicResource ThemeBackgroundColor}"
+                x:Name="childView"
+                ItemsSource="{Binding HistoryItems}"
+                SelectionMode="None"
+                ItemSizingStrategy="MeasureAllItems"
+                VerticalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                        Span="{OnIdiom Phone=1, Tablet=2}" HorizontalItemSpacing="{OnIdiom Phone=0, Tablet=4}" VerticalItemSpacing="8"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:AccessHistoryModel">
+                        <StackLayout Padding="8,0">
+                            <Frame HasShadow="False" CornerRadius="12" BackgroundColor="#f2f2f7" Padding="12">
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding IsSecurityForbidden}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="#ff453a" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <Grid ColumnDefinitions="40,*,80" ColumnSpacing="16">
+
+                                    <Label Text="" FontFamily="IconsLightFont" FontSize="40"
+                                           VerticalOptions="Center"
+                                           Grid.Column="0">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsSecurityForbidden}" Value="True">
+                                                <Setter Property="TextColor" Value="White" />
+                                                <Setter Property="Text" Value="" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+
+                                    <StackLayout Orientation="Vertical" Spacing="12"
+                                                 Grid.Column="1">
+                                        <Label VerticalOptions="Center" Text="{Binding ParentName}">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSecurityForbidden}" Value="True">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        
+                                        <Label VerticalOptions="Center" Text="Вошел" FontSize="Small">
+                                            <!--<Label.Triggers>
+                                                <MultiTrigger TargetType="Label">
+                                                  <MultiTrigger.Conditions>
+                                                    <BindingCondition Binding="{Binding IsSecurityForbidden}"
+                                                                      Value="false" />
+                                                    <BindingCondition Binding="{Binding IsEmergencyEntry}"
+                                                                      Value="false" />
+                                                  </MultiTrigger.Conditions>
+                                                  <Setter Property="IsVisible" Value="True" />
+                                                </MultiTrigger>
+                                              </Label.Triggers>-->
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSecurityForbidden}" Value="True">
+                                                    <Setter Property="IsVisible" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsEmergencyEntry}" Value="True">
+                                                    <Setter Property="IsVisible" Value="False" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+
+                                        <Label VerticalOptions="Center" Text="Экстренный вход" FontSize="Small" IsVisible="{Binding IsEmergencyEntry}"
+                                               TextColor="#ff453a" FontAttributes="Bold"/>
+
+                                        <Label VerticalOptions="Center" FontSize="Small" IsVisible="{Binding IsEmergencyEntry}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="По причине: "/>
+                                                    <Span Text="{Binding Reason}"/>
+                                                </FormattedString>
+
+                                            </Label.FormattedText>
+                                        </Label>
+
+
+                                        <Label VerticalOptions="Center" Text="Отказано" FontSize="Small" IsVisible="{Binding IsSecurityForbidden}"
+                                               TextColor="White"/>
+                                    </StackLayout>
+
+                                    <Label VerticalOptions="Center" FontAttributes="Bold" HorizontalTextAlignment="Center"
+                                           HorizontalOptions="End"
+                                           Grid.Column="2">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding TimeEvent, StringFormat='{}{0:hh:mm}'}"/>
+                                                <Span Text="&#10;" />
+                                                <Span Text="{Binding TimeEvent, StringFormat='{}{0:MM.dd.yyyy}'}" FontSize="Micro"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsSecurityForbidden}" Value="True">
+                                                    <Setter Property="TextColor" Value="White" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+
+                                </Grid>
+                                <!--<Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnChildClick" />
+                        </Frame.GestureRecognizers>-->
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

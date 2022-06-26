@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DigitalEntry.Views.CodeSelectPage"
+    xmlns:vm="clr-namespace:DigitalEntry.ViewModels"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
+    Title="Вход в учреждение">
+    <ContentPage.Content>
+        <StackLayout Padding="8">
+            <Frame HasShadow="False" CornerRadius="12" BackgroundColor="#007AFF" Padding="20,16">
+                <StackLayout Orientation="Horizontal" Spacing="16">
+                    <Label Text="&#xf274;" FontFamily="IconsRegularFont" FontSize="40" VerticalOptions="Center"
+                           TextColor="White" MinimumWidthRequest="48"/>
+                    <StackLayout Orientation="Vertical">
+                        <Label VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"
+                                       Text="По расписанию" TextColor="White"/>
+                        <Label VerticalOptions="Center" TextColor="White"
+                               Text="Вход доступен утром с 8:00 до 9:00 и вечером с 18:00 до 19:00" />
+                    </StackLayout>
+                </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnShowScheduleCode" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame HasShadow="False" CornerRadius="12" BackgroundColor="#007AFF" Padding="20,16">
+                <StackLayout Orientation="Horizontal" Spacing="16">
+                    <Label Text="&#xf4ac;" FontFamily="IconsRegularFont" FontSize="40" VerticalOptions="Center"
+                           TextColor="White" MinimumWidthRequest="48"/>
+                    <StackLayout Orientation="Vertical">
+                        <Label VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"
+                                       Text="По запросу" TextColor="White"/>
+                        <Label VerticalOptions="Center" TextColor="White"
+                               Text="Запрос доступа на вход у сотрудника учреждения" />
+                    </StackLayout>
+                </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnShowRequestCode" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame HasShadow="False" CornerRadius="12" BackgroundColor="#ff453a" Padding="20,16">
+                <StackLayout Orientation="Horizontal" Spacing="16">
+                    <Label Text="" FontFamily="IconsRegularFont" FontSize="40" VerticalOptions="Center"
+                           TextColor="White" MinimumWidthRequest="48"/>
+                    <StackLayout Orientation="Vertical">
+                        <Label VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"
+                                       Text="Экстренно" TextColor="White"/>
+                        <Label VerticalOptions="Center" TextColor="White"
+                               Text="Запрос доступа в случае крайней необходимости или угрозе жизни ребенка" />
+                    </StackLayout>
+                </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnClickEmergency" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <BoxView VerticalOptions="FillAndExpand"/>
+
+            <Button Text="Мой код утерян" VerticalOptions="End" Clicked="OnLostCode"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

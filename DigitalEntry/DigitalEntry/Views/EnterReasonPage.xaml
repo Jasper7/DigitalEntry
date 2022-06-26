@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DigitalEntry.Views.EnterReasonPage"
+    xmlns:vm="clr-namespace:DigitalEntry.ViewModels"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
+    ios:Page.ModalPresentationStyle="FormSheet">
+    <ContentPage.Content>
+        <StackLayout Padding="16">
+            <Label Text="Укажите причину экстренного входа:" />
+            <Editor Placeholder="Например: Ребенок травмировался"
+                    VerticalOptions="FillAndExpand" x:Name="ReasonText"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Отмена" Clicked="OnClose" HorizontalOptions="FillAndExpand"/>
+                <Button Text="Отправить" Clicked="OnSend" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

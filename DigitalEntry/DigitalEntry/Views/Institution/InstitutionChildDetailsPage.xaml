@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DigitalEntry.Views.Institution.InstitutionChildDetailsPage"
+    xmlns:model="clr-namespace:DigitalEntry.Models"
+    xmlns:vm="clr-namespace:DigitalEntry.ViewModels">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="16,8" Orientation="Vertical" x:DataType="vm:ChildDetailsVM">
+
+                <Frame BackgroundColor="#f2f2f7" HasShadow="False" CornerRadius="12">
+                    <Grid ColumnDefinitions="Auto,*" VerticalOptions="StartAndExpand" HeightRequest="96">
+                        <StackLayout>
+                            <Label Text="Папа:" FontSize="Subtitle"/>
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Parent1.FirstName}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding Parent1.LastName}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <Label Text="" FontFamily="IconsSolidFont"  HorizontalOptions="End" Grid.Column="1"
+                           VerticalOptions="Center" FontSize="Title" TextColor="Green">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnParentCall" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnParentClick" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame BackgroundColor="#f2f2f7" HasShadow="False" CornerRadius="12">
+                    <Grid ColumnDefinitions="Auto,*" VerticalOptions="StartAndExpand" HeightRequest="96">
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="Мама:" FontSize="Subtitle"/>
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Parent2.FirstName}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding Parent2.LastName}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <Label Text="" FontFamily="IconsSolidFont"  HorizontalOptions="End" Grid.Column="1"
+                           VerticalOptions="Center" FontSize="Title" TextColor="Green">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnParentCall" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnParentClick" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <!--<Grid ColumnDefinitions="Auto,*" VerticalOptions="StartAndExpand" HeightRequest="96">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Директор:" FontSize="Subtitle"/>
+                    <Label Text="Носонов Игорь Генадьевич " />
+                </StackLayout>
+                    <Label Text="" FontFamily="IconsSolidFont"  HorizontalOptions="End" Grid.Column="1"
+                           VerticalOptions="Center" FontSize="Title" TextColor="Green"/>
+                    </Grid>-->
+            </StackLayout>
+
+
+            <CollectionView BackgroundColor="{DynamicResource ThemeBackgroundColor}"
+                x:Name="childView"
+                ItemsSource="{Binding HistoryItems}"
+                SelectionMode="None"
+                ItemSizingStrategy="MeasureAllItems"
+                VerticalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                        Span="{OnIdiom Phone=1, Tablet=2}" HorizontalItemSpacing="{OnIdiom Phone=0, Tablet=4}" VerticalItemSpacing="8"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:EnterHistoryModel">
+                        <StackLayout Padding="8,0">
+                            <Frame HasShadow="False" CornerRadius="12" BackgroundColor="#e5e5ea" Padding="12">
+                                <StackLayout Orientation="Horizontal" Spacing="12">
+                                    <StackLayout Orientation="Horizontal" Spacing="12" HorizontalOptions="FillAndExpand">
+                                        <Label Text="" FontFamily="IconsLightFont" FontSize="40" VerticalOptions="Center" MinimumWidthRequest="48"
+                                               IsVisible="{Binding IsEnter}"/>
+                                        <Label Text="" FontFamily="IconsLightFont" FontSize="40" VerticalOptions="Center" MinimumWidthRequest="48"
+                                               IsVisible="{Binding IsLeave}"/>
+                                        <Label VerticalOptions="Center" Text="Вошел" IsVisible="{Binding IsEnter}" />
+                                        <Label VerticalOptions="Center" Text="Покинул" IsVisible="{Binding IsLeave}"/>
+                                    </StackLayout>
+                                    <Label VerticalOptions="Start" FontAttributes="Bold" HorizontalTextAlignment="Center"
+                                           HorizontalOptions="End">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding TimeEvent, StringFormat='{}{0:h:mm}'}" FontSize="Large"/>
+                                                <Span Text="&#10;" />
+                                                <Span Text="{Binding TimeEvent, StringFormat='{}{0:MM.dd.yyyy}'}" FontSize="Default"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                </StackLayout>
+                                <!--<Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnChildClick" />
+                        </Frame.GestureRecognizers>-->
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

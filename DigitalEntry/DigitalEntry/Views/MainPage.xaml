@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DigitalEntry.Views.MainPage"
+             xmlns:model="clr-namespace:DigitalEntry.Models"
+             xmlns:vm="clr-namespace:DigitalEntry.ViewModels"
+             Title="Мои дети">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="8">
+    <CollectionView BackgroundColor="{DynamicResource ThemeBackgroundColor}"
+                x:Name="childView"
+                ItemsSource="{Binding ChildItems}"
+                SelectionMode="None"
+                ItemSizingStrategy="MeasureAllItems"
+                VerticalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                        Span="{OnIdiom Phone=1, Tablet=2}" HorizontalItemSpacing="{OnIdiom Phone=0, Tablet=4}" VerticalItemSpacing="8"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:ChildModel">
+                    <Frame HasShadow="False" CornerRadius="12" BackgroundColor="#e5e5ea" Padding="12">
+                        <StackLayout Orientation="Horizontal" Spacing="12">
+                            <Frame BackgroundColor="White" Padding="4" CornerRadius="12" HasShadow="False"
+                                   WidthRequest="64">
+                                <Image Source="UserChild"/>
+                            </Frame>
+                            <StackLayout Orientation="Vertical">
+                                <Label VerticalOptions="Start" FontSize="Large" FontAttributes="Bold">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding FirstName}" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding LastName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label VerticalOptions="Start">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding SchoolName}" />
+                                            <Span Text=" - " />
+                                            <Span Text="{Binding ClassName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                            
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnChildClick" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!--<Button Margin="0,10,0,0" Text="Показать код пропуска"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White" Clicked="OnShowCode"/>-->
+    </StackLayout>
+</ContentPage>
+

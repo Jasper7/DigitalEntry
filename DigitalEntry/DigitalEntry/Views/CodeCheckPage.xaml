@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DigitalEntry.Views.CodeCheckPage"
+    BackgroundColor="Aqua">
+    <ContentPage.Content>
+        <Grid x:Name="RootView">
+            <Image Source="{OnPlatform Android=scan_frame, iOS=ScannerFrame}" VerticalOptions="Center" HorizontalOptions="Center"
+                   WidthRequest="{OnPlatform Android=200}"/>
+
+            <Grid IsVisible="{Binding IsApprove}">
+                <Frame CornerRadius="24" HasShadow="False" IsClippedToBounds="True" Padding="0" Margin="16"
+                       VerticalOptions="Center">
+                    <Image Source="Dmitry.jpg" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                </Frame>
+                
+                <StackLayout BackgroundColor="#32d74b" VerticalOptions="End" Padding="0,24,0,40">
+                    <Label Text="Васильев Дмитрий Николаевич" HorizontalOptions="Center" FontSize="{OnPlatform iOS=48, Android=24}"
+                           TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                    <Label Text="Вход разрешен" HorizontalOptions="Center" FontSize="Title"
+                           TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
+                        <Button Text="Отказать" HorizontalOptions="FillAndExpand" BackgroundColor="Black"
+                                Clicked="OnDeny"/>
+                        <Button Text="Пропустить" HorizontalOptions="FillAndExpand" BackgroundColor="Black"
+                                Clicked="OnAccept"/>
+                    </StackLayout>
+                    
+                </StackLayout>
+            </Grid>
+
+            <Grid IsVisible="{Binding IsDeny}">  
+                <Frame CornerRadius="24" HasShadow="False" IsClippedToBounds="True" Padding="0" Margin="16"
+                       VerticalOptions="Center">
+                    <Image Source="Dmitry.jpg" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                </Frame>
+                
+                <StackLayout BackgroundColor="#ff453a" VerticalOptions="End" Padding="0,24,0,40">
+                    <Label Text="Иванова Алла Петровна" HorizontalOptions="Center" FontSize="{OnPlatform iOS=48, Android=24}"
+                           TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                    <Label Text="Вход запрещен" HorizontalOptions="Center" FontSize="Title"
+                           TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
+                        <Button Text="Закрыть" HorizontalOptions="FillAndExpand" BackgroundColor="Black"
+                                Clicked="OnClose"/>
+                    </StackLayout>
+                    
+                </StackLayout>
+            </Grid>
+
+            <!--<StackLayout BackgroundColor="#ff453a" VerticalOptions="End" Padding="0,24,0,40"
+                         IsVisible="{Binding IsDeny}">
+                <Label Text="Вход запрещен" HorizontalOptions="Center" FontSize="Title"
+                       TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            </StackLayout>-->
+
+            <BoxView BackgroundColor="Black" Opacity="0.7" IsVisible="{Binding IsBusy}"/>
+
+            <StackLayout IsVisible="{Binding IsBusy}" >
+                <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand"
+                                   Color="White"/>
+                <Label Text="Проверяем" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"
+                       TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage> 

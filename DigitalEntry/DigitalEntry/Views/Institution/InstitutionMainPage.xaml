@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DigitalEntry.Views.Institution.InstitutionMainPage"
+    Title="Расписание">
+    <ContentPage.Content>
+        <StackLayout Spacing="16" Padding="16">
+            <Frame HasShadow="False" CornerRadius="12" BackgroundColor="#f2f2f7">
+                <StackLayout Spacing="16">
+                    <Label Text="Для приема ребенка:" />
+                     <StackLayout Orientation="Horizontal">
+                        <Label Text="C" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center"/>
+                        <TimePicker VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                                    Time="07:00"/>
+                        <Label Text="по" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center"/>
+                        <TimePicker VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                                    Time="08:00"/>
+                    </StackLayout> 
+                </StackLayout>
+            </Frame>
+
+            <Frame HasShadow="False" CornerRadius="12" BackgroundColor="#f2f2f7">
+                <StackLayout Spacing="16">
+                    <Label Text="Для ухода ребенка:" />
+                     <StackLayout Orientation="Horizontal">
+                        <Label Text="C" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center"/>
+                        <TimePicker VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                                    Time="12:00"/>
+                        <Label Text="по" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center"/>
+                        <TimePicker VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                                    Time="13:30"/>
+                    </StackLayout> 
+                </StackLayout>
+            </Frame>
+
+            <BoxView VerticalOptions="FillAndExpand" />
+
+            <Button Text="Сохранить расписание" Clicked="OnSave"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
